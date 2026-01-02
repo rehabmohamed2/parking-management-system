@@ -12,6 +12,7 @@ This repository contains a complete parking management ecosystem consisting of f
 - **ERP_Service**: External ERP integration service
 
 ## Key Features
+![Parking Management System](Picture1.png)
 
 - Hierarchical parking site management with geographic boundaries
 - Real-time customer ticket booking system
