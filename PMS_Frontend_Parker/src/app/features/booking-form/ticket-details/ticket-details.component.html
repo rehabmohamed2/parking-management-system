@@ -1,0 +1,61 @@
+<div class="ticket-container">
+  <app-language-switcher></app-language-switcher>
+
+  <div class="ticket-card" *ngIf="ticket">
+    <!-- Header -->
+    <div class="ticket-header">
+      <h1 class="ticket-title">{{ 'ticket.title' | translate }}</h1>
+      <p class="ticket-subtitle">{{ 'ticket.subtitle' | translate }}</p>
+    </div>
+
+    <!-- Ticket Details Table -->
+    <div class="ticket-details">
+      <div class="detail-row">
+        <span class="detail-label">{{ 'ticket.ticketId' | translate }}</span>
+        <span class="detail-value">{{ ticket.ticket_id || 'N/A' }}</span>
+      </div>
+
+      <div class="detail-row">
+        <span class="detail-label">{{ 'ticket.siteName' | translate }}</span>
+        <span class="detail-value">{{ getSiteName() || 'N/A' }}</span>
+      </div>
+
+      <div class="detail-row">
+        <span class="detail-label">{{ 'ticket.plateNumber' | translate }}</span>
+        <span class="detail-value">{{ ticket.plateNumber || 'N/A' }}</span>
+      </div>
+
+      <div class="detail-row">
+        <span class="detail-label">{{ 'ticket.phoneNumber' | translate }}</span>
+        <span class="detail-value">{{ ticket.phoneNumber || 'N/A' }}</span>
+      </div>
+
+      <div class="detail-row">
+        <span class="detail-label">{{ 'ticket.hours' | translate }}</span>
+        <span class="detail-value">{{ formatNumber(ticket.hours) || 'N/A' }}</span>
+      </div>
+
+      <div class="detail-row highlight">
+        <span class="detail-label">{{ 'ticket.totalPrice' | translate }}</span>
+        <span class="detail-value price"
+          >{{ formatNumber(ticket.totalPrice) }} {{ 'booking.sar' | translate }}</span
+        >
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="ticket-actions">
+      <button class="btn btn-primary" (click)="goBack()">
+        {{ 'ticket.bookAnother' | translate }}
+      </button>
+    </div>
+
+    <!-- Footer -->
+    <div class="ticket-footer">
+      <p>{{ 'ticket.footer' | translate }}</p>
+      <p class="timestamp">
+        {{ 'ticket.bookedOn' | translate }} {{ formatDateTime(ticket.createdAt) }}
+      </p>
+    </div>
+  </div>
+</div>

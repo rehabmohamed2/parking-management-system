@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="../Booking.Model.Shared/Booking.Model.Shared.csproj" />
+      <ProjectReference Include="../code/Services/Booking/Booking.Model/Booking.Model.csproj" />
+      <ProjectReference Include="../SharedKernel.EventDriven.Abstraction/SharedKernel.EventDriven.Abstraction.csproj" />
+      <ProjectReference Include="../SharedKernel.Infratsrucrure.Persistent/SharedKernel.Infratsrucrure.Persistent.csproj" />
+      <ProjectReference Include="../Site.Model.Shared/Site.Model.Shared.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="DTO/" />
+      <Folder Include="EventHandlers/" />
+      <Folder Include="FluentValidation/" />
+      <Folder Include="Services/" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.1" />
+    </ItemGroup>
+
+</Project>

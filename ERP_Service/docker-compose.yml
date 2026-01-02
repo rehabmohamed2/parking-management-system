@@ -1,0 +1,48 @@
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: integrationservice-sqlserver
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=mostafa#1234
+      - MSSQL_PID=Express
+    ports:
+      - "1435:1435"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    networks:
+      - integrationservice-network
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P mostafa#1234 -C -Q 'SELECT 1' || exit 1",
+        ]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
+
+  integrationservice:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: integrationservice-app
+    ports:
+      - "5230:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=InvoiceDb;User Id=SA;Password=mostafa#1234;TrustServerCertificate=True;Encrypt=False;
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    networks:
+      - integrationservice-network
+
+networks:
+  integrationservice-network:
+    driver: bridge
+
+volumes:
+  sqlserver_data:
